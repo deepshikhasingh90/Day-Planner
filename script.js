@@ -1,0 +1,79 @@
+let m= moment();
+console.log(m);
+var currentDate=moment().format('dddd,MMM Do');
+$("#currentDay").text(currentDate).css("color","#DB7093");
+
+$( document ).ready(function() {
+    for (var i = 9;i < 18;i++){
+        //create a div section
+        var rowDiv = $('<div>');
+        rowDiv.attr('data-time',i);
+        rowDiv.addClass('row rowBlock');
+        $(".container").append(rowDiv);
+
+        // creating hour section
+        var displayHour = 0;
+        let merediem = "";
+        if (i > 12) { 
+        displayHour = i - 12;
+        merediem = "PM";
+        } else {
+        displayHour = i;
+        merediem = "AM";
+        }
+        var hourSection = $('<div>');
+        hourSection.addClass('col-md-2 hour');
+        const timeSpanSection = $('<span>');
+        timeSpanSection.text(displayHour + merediem );
+        hourSection.append(timeSpanSection);
+    
+        // build the  form section
+        var planDiv = $('<div>');
+        planDiv.addClass('col-md-9 col-sm-8');
+        var planSection = $('<input>');
+        planSection.attr('type','textarea');
+        // ('<textarea rows="5" cols="50">')
+        planSection.addClass("display-area")
+        planSection.attr('id','displaySection');
+        // planSection.attr('hour-index',index);
+        planDiv.append(planSection);
+        
+        // submit Button
+        var saveButton = $("<i class='far fa-save lg'></i>")
+        var savePlan = $("<button>");
+        savePlan.attr({'class':'col-md-1 saveBtn'});
+        savePlan.append(saveButton);
+        rowDiv.append(hourSection,planDiv,savePlan)
+    }
+
+    $(".rowBlock").each(function() {
+        var elementTime = $(this).attr("data-time")
+        var currentTime = new Date().getHours();
+        // console.log(currentTime +"you know"+ j);
+        if (currentTime > elementTime)
+        {
+            $(this).addClass( "past");
+            // console.log(this.innerHTML)
+        }
+        else if (currentTime < elementTime) 
+        {
+            $(this).addClass( "future");
+        }
+        else 
+        {
+            $(this).addClass( "present");
+        }
+            
+    });
+    // localStorage
+    $(".saveBtn").on("click", function() {
+        var elementTime =  $(this).attr("data-time");
+        var currentNote = $(this).parent().find("textarea").val();
+        console.log(currentNote);
+        localStorage.setItem(elementTime, currentNote);
+        // console.log(textarea.val());
+
+
+    
+    });
+});
