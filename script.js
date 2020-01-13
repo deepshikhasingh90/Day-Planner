@@ -5,9 +5,9 @@ $("#currentDay").text(currentDate).css("color","#DB7093");
 
 $( document ).ready(function() {
     for (var i = 9;i < 18;i++){
-        //create a div section
-        var rowDiv = $('<div>');
-        rowDiv.attr('data-time',i);
+        //create main div section
+        // index=9;
+        var rowDiv = $('<div>').attr('data-time',i);
         rowDiv.addClass('row rowBlock');
         $(".container").append(rowDiv);
 
@@ -28,7 +28,7 @@ $( document ).ready(function() {
         hourSection.append(timeSpanSection);
     
         // build the  form section
-        var planDiv = $('<div>');
+        var planDiv = $('<div id="textAreaDiv">');
         planDiv.addClass('col-md-9 col-sm-8');
         var planSection = $('<input>');
         planSection.attr('type','textarea');
@@ -67,13 +67,16 @@ $( document ).ready(function() {
     });
     // localStorage
     $(".saveBtn").on("click", function() {
-        var elementTime =  $(this).attr("data-time");
-        var currentNote = $(this).parent().find("textarea").val();
-        console.log(currentNote);
-        localStorage.setItem(elementTime, currentNote);
+        var elementTime =  $(this).parent().attr("data-time");
+        console.log(elementTime);
+        var Note = $(this).siblings("#textAreaDiv").children("#displaySection").val();
+        console.log(Note);
+        localStorage.setItem(elementTime, Note);
         // console.log(textarea.val());
-
-
-    
-    });
 });
+});
+
+let storedPlans = JSON.parse(localStorage.getItem("storedPlans"));
+
+
+
