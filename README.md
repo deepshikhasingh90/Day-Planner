@@ -11,11 +11,11 @@ For this project, I've created a simple calendar application that allows the use
 ### Build Width
 1. Html
 2. CSS
-3. javascript
+3. Bootstrap
+4. jquery
 
 ### Programme logic :
 
-1. The user is asked to select the length of the password and the characters he needs in his password. 
-2. I created arrays for Uppercase, Lowercase, Special Characters and Numbers.
-3. I Also created an empty array chars[], and depending on the user's choice of character , the created arrays would be pushed into the empty array chars[].
-4. I used Math.random to randomly select values from the chars[] array.
+1. I have used moment.js to dynamically update the date and time on te page 
+2. I created 3 Divs dynamically and appended them to the main div. 
+3. Local Storage has been used to dispay data after refresh.
