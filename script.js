@@ -15,11 +15,12 @@ $( document ).ready(function() {
         var displayHour = 0;
         let merediem = "";
         if (i > 12) { 
-        displayHour = i - 12;
-        merediem = "PM";
-        } else {
-        displayHour = i;
-        merediem = "AM";
+            displayHour = i - 12;
+            merediem = "PM";
+        } else 
+        {
+            displayHour = i;
+            merediem = "AM";
         }
         var hourSection = $('<div>');
         hourSection.addClass('col-md-2 hour');
@@ -27,12 +28,11 @@ $( document ).ready(function() {
         timeSpanSection.text(displayHour + merediem );
         hourSection.append(timeSpanSection);
     
-        // build the  form section
+        // creating  the  form section
         var planDiv = $('<div id="textAreaDiv">');
         planDiv.addClass('col-md-9 col-sm-8');
         var planSection = $('<input>');
         planSection.attr('type','textarea');
-        // ('<textarea rows="5" cols="50">')
         planSection.addClass("display-area")
         planSection.attr('id','displaySection');
         // planSection.attr('hour-index',index);
@@ -45,7 +45,7 @@ $( document ).ready(function() {
         savePlan.append(saveButton);
         rowDiv.append(hourSection,planDiv,savePlan)
     }
-
+    // code to chnage the color of the classes based on past/present/future
     $(".rowBlock").each(function() {
         var elementTime = $(this).attr("data-time")
         var currentTime = new Date().getHours();
@@ -73,10 +73,12 @@ $( document ).ready(function() {
         console.log(Note);
         localStorage.setItem(elementTime, Note);
         // console.log(textarea.val());
+    });
+
+    let elem = 9;
+    $(".rowBlock").children("#textAreaDiv").children("#displaySection").each(function () {
+        $(this).val(localStorage.getItem(elem));
+        elem++;
+    });
 });
-});
-
-let storedPlans = JSON.parse(localStorage.getItem("storedPlans"));
-
-
 
